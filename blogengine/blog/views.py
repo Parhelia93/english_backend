@@ -3,6 +3,7 @@ from django.views.generic import View
 from .models import Post, Tag
 from .util import ObjectDetailMixin, ObjectCreateMixin, ObjectUpdateMixin, ObjectDeleteMixin
 from .forms import TagForm, PostForm, TagFormUpdate
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def post_list(request):
@@ -25,26 +26,29 @@ class TagDetail(ObjectDetailMixin, View):
     template = 'blog/tag_detail.html'
 
 
-class TagCreate(ObjectCreateMixin, View):
+class TagCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     form = TagForm
     template = 'blog/tag_create.html'
+    raise_exception = True
 
-
-class PostCreate(ObjectCreateMixin, View):
+class PostCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     form = PostForm
     template = 'blog/post_create.html'
+    raise_exception = True
 
 
-class TagUpdate(ObjectUpdateMixin, View):
+class TagUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
     model = Tag
     model_form = TagFormUpdate
     template = 'blog/tag_update.html'
+    raise_exception = True
 
 
-class PostUpdate(ObjectUpdateMixin, View):
+class PostUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
     model = Post
     model_form = PostForm
     template = 'blog/post_update.html'
+    raise_exception = True
 
 
 class TagDelete(ObjectDeleteMixin, View):
