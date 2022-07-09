@@ -25,10 +25,16 @@ class Post(models.Model):
     def update_absolute_url(self):
         return reverse('post_update_url', kwargs={'slug': self.slug})
 
+    def delete_absolute_url(self):
+        return reverse('post_delete_url', kwargs={'slug': self.slug})
+
     def save(self, *args, **kwargs):
         if not self.pk:
             self.slug = gen_slug(self.title)
         super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-date_pub']
 
 
 class Tag(models.Model):
@@ -46,3 +52,6 @@ class Tag(models.Model):
 
     def delete_absolute_url(self):
         return reverse('tag_delete_url', kwargs={'slug': self.slug})
+
+    class Meta:
+        ordering = ['title']

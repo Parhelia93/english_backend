@@ -10,7 +10,7 @@
 
 
 <h1 class="mb-5">Posts: </h1>
-{% for post in posts %}
+{% for post in page_object.object_list %}
   {% include 'blog/includes/card_detail.html' %}
 {% endfor %}
 {% endblock %}

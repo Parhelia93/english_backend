@@ -1,6 +1,0 @@
-border: 5px solid #999
-
-border - tolshina contra
-solid - cvet zalivki
-
-border-radius - zacruglenie kraev
